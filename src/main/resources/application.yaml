@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: StarWars
+server:
+  port: 7777
