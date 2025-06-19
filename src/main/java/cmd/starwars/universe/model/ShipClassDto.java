@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ShipClass {
+public class ShipClassDto {
     private Long id;
     private String name;
 }

@@ -3,12 +3,17 @@ package cmd.starwars.universe.services.mappers;
 import cmd.starwars.universe.model.*;
 import cmd.starwars.universe.repo.entities.*;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EntityMapper {
+    Allegiance toAllegiance(AllegianceDto allegianceDto);
+
+    AllegianceDto toAllegianceDto(Allegiance allegiance);
+
     Hero toHero(HeroDto heroDto);
 
-    HeroDto toHeroDto(Hero hero);
+    HeroDto toHeroDto(Hero heroDto);
 
     Planet toPlanet(PlanetDto planetDto);
 

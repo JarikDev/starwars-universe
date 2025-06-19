@@ -3,4 +3,4 @@
 http://localhost:7100/h2-console
 - [ ] url=jdbc:h2:mem:universe
 - [ ] user=sa
-- [ ] password=password
+- [ ] password=pw

@@ -2,20 +2,21 @@ package cmd.starwars.universe.repo.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class TrooperDto {
+@NoArgsConstructor
+public class Allegiance {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column
     private String name;
-    @Column
-    private int classId;
-    @ManyToOne
-    @JoinColumn(name = "planet_id", referencedColumnName = "id")
-    private PlanetDto planet;
+
+    public Allegiance(String name) {
+        this.name = name;
+    }
 }

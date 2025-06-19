@@ -2,12 +2,14 @@ package cmd.starwars.universe.repo.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class ShipDto {
+@NoArgsConstructor
+public class Ship {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -23,5 +25,14 @@ public class ShipDto {
     private float dpsMax;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "star_system_id", referencedColumnName = "id")
-    private StarSystemDto starSystem;
+    private StarSystem starSystem;
+
+    public Ship(String name, int shipClass, float hp, float dpsMin, float dpsMax, StarSystem starSystem) {
+        this.name = name;
+        this.shipClass = shipClass;
+        this.hp = hp;
+        this.dpsMin = dpsMin;
+        this.dpsMax = dpsMax;
+        this.starSystem = starSystem;
+    }
 }
