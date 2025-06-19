@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ShipClass {
+public class UnitClass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -25,7 +25,7 @@ public class ShipClass {
     @Column
     private float dpsMax;
 
-    public ShipClass(String name, Allegiance allegiance, float hp, float dpsMin, float dpsMax) {
+    public UnitClass(String name, Allegiance allegiance, float hp, float dpsMin, float dpsMax) {
         this.name = name;
         this.allegiance = allegiance;
         this.hp = hp;

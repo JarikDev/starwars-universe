@@ -1,6 +1,9 @@
 package cmd.starwars.universe.repo.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,18 +12,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class StarSystem {
+public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
-    private Allegiance allegiance;
 
-    public StarSystem(String name, Allegiance allegiance) {
+    public Status(String name) {
         this.name = name;
-        this.allegiance = allegiance;
     }
 }

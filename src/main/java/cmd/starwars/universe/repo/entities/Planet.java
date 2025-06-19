@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -17,22 +15,16 @@ public class Planet {
     private Long id;
     @Column
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "star_system_id", referencedColumnName = "id")
     private StarSystem starSystem;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
     private Allegiance allegiance;
-    @OneToMany(mappedBy = "planet", cascade = CascadeType.PERSIST)
-    private List<Hero> heroes;
-    @OneToMany(mappedBy = "planet", cascade = CascadeType.PERSIST)
-    private List<Trooper> troopers;
 
-    public Planet(String name, StarSystem starSystem, Allegiance allegiance, List<Hero> heroes, List<Trooper> troopers) {
+    public Planet(String name, StarSystem starSystem, Allegiance allegiance) {
         this.name = name;
         this.starSystem = starSystem;
         this.allegiance = allegiance;
-        this.heroes = heroes;
-        this.troopers = troopers;
     }
 }

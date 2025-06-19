@@ -10,6 +10,7 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
   h2:
     console:
       enabled: true
@@ -20,4 +21,7 @@ spring:
       creationTopic: creation_topic
       destructionTopic: destruction_topic
 
-
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

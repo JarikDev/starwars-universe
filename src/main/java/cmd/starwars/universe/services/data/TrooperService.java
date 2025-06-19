@@ -1,7 +1,7 @@
-package cmd.starwars.universe.services;
+package cmd.starwars.universe.services.data;
 
 import cmd.starwars.universe.repo.TrooperRepository;
-import cmd.starwars.universe.repo.entities.Trooper;
+import cmd.starwars.universe.repo.entities.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,20 +16,20 @@ public class TrooperService {
         this.troopers = troopers;
     }
 
-    public void save(Trooper trooper) {
-        troopers.save(trooper);
+    public void save(Unit unit) {
+        troopers.save(unit);
     }
 
-    public void delete(Trooper trooper) {
-        troopers.delete(trooper);
+    public void delete(Unit unit) {
+        troopers.delete(unit);
     }
 
-    public Trooper findById(long trooperId) {
+    public Unit findById(long trooperId) {
         return troopers.findById(trooperId)
                 .orElse(null);
     }
 
-    public List<Trooper> findAll() {
+    public List<Unit> findAll() {
         return troopers.findAll();
     }
 }

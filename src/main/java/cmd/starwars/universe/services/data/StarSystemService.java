@@ -1,6 +1,7 @@
-package cmd.starwars.universe.services;
+package cmd.starwars.universe.services.data;
 
 import cmd.starwars.universe.repo.StarSystemRepository;
+import cmd.starwars.universe.repo.entities.Allegiance;
 import cmd.starwars.universe.repo.entities.StarSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,16 @@ public class StarSystemService {
                 .orElse(null);
     }
 
+    public StarSystem findByName(String name) {
+        return starSystems.findStarSystemByName(name)
+                .orElse(null);
+    }
+
     public List<StarSystem> findAll() {
         return starSystems.findAll();
+    }
+
+    public List<StarSystem> findAll(Allegiance allegiance) {
+        return starSystems.findStarSystemByAllegiance(allegiance);
     }
 }

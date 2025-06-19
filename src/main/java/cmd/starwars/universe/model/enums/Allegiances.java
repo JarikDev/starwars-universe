@@ -4,16 +4,17 @@ import lombok.Getter;
 
 @Getter
 public enum Allegiances {
-    NEUTRAL("Neutral"),
     SEPARATIST("Separatist"),
     REPUBLIC("Republic"),
-    JEDI("Jedi"),
-    CLONE_TROOPER("Clone trooper"),
-    HUTT("Hutt"),
-    EMPIRE("Empire"),
-    PIRATE("Pirate"),
-    MERCENARY("Mercenary"),
-    BOUNTY_HUNTER("Bounty hunter");
+//    NEUTRAL("Neutral"),
+//    JEDI("Jedi"),
+//    CLONE_TROOPER("Clone trooper"),
+//    HUTT("Hutt"),
+//    EMPIRE("Empire"),
+//    PIRATE("Pirate"),
+//    MERCENARY("Mercenary"),
+//    BOUNTY_HUNTER("Bounty hunter")
+    ;
 
 
     private final String name;

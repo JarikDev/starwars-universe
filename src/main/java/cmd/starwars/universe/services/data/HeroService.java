@@ -1,4 +1,4 @@
-package cmd.starwars.universe.services;
+package cmd.starwars.universe.services.data;
 
 import cmd.starwars.universe.repo.HeroRepository;
 import cmd.starwars.universe.repo.entities.Hero;

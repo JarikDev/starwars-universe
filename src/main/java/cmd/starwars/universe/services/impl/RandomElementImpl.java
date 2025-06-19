@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class RandomElementImpl<T> implements RandomElement<T> {
+public class RandomElementImpl implements RandomElement {
     @Override
-    public T get(List<T> list) {
+    public <T> T get(List<T> list) {
         Random random = new Random();
         int idx = random.nextInt(list.size());
         return list.get(idx);

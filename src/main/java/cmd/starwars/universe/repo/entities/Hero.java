@@ -24,19 +24,30 @@ public class Hero {
     @Column
     private float dpsMax;
     @ManyToOne
+    @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
+    private Allegiance allegiance;
+    @ManyToOne
     @JoinColumn(name = "planet_id", referencedColumnName = "id")
     private Planet planet;
     @ManyToOne
-    @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
-    private Allegiance allegiance;
+    @JoinColumn(name="status_id",referencedColumnName = "id")
+    private Status status;
 
-    public Hero(String name, float hp, float buff, float dpsMin, float dpsMax, Planet planet,Allegiance allegiance) {
+    public Hero(String name,
+                float hp,
+                float buff,
+                float dpsMin,
+                float dpsMax,
+                Allegiance allegiance,
+                Planet planet,
+                Status status) {
         this.name = name;
         this.hp = hp;
         this.buff = buff;
         this.dpsMin = dpsMin;
         this.dpsMax = dpsMax;
-        this.planet = planet;
         this.allegiance = allegiance;
+        this.planet = planet;
+        this.status = status;
     }
 }

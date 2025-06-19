@@ -1,8 +1,8 @@
 package cmd.starwars.universe.config;
 
 import cmd.starwars.universe.repo.entities.*;
-import cmd.starwars.universe.services.EntityService;
-import cmd.starwars.universe.services.impl.EntityServiceImpl;
+import cmd.starwars.universe.services.data.EntityService;
+import cmd.starwars.universe.services.data.EntityServiceImpl;
 import cmd.starwars.universe.services.mappers.EntityMapper;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -61,7 +61,7 @@ public class BeanConfig {
     }
 
     @Bean
-    public EntityService<Trooper> getTrooperEntityService(JpaRepository<Trooper, Long> repo) {
+    public EntityService<Unit> getTrooperEntityService(JpaRepository<Unit, Long> repo) {
         return new EntityServiceImpl<>(repo);
     }
 

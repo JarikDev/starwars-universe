@@ -24,7 +24,7 @@ public class NameGenerator {
             "-Alpha", "-Beta", "-Epsilon", "-Theta", "-Lambda"
     };
 
-    public String generateName() {
+    public String generateTrooperName() {
         Random rand = new Random();
         String prefix = PREFIXES[rand.nextInt(PREFIXES.length)];
         String suffix = SUFFIXES[rand.nextInt(SUFFIXES.length)];
@@ -48,5 +48,32 @@ public class NameGenerator {
         return names;
     }
 
+    private static final String[] SHIP_PREFIXES = {
+            "V", "K", "Z", "T", "M", "X", "Y", "R", "L", "N",
+            "D", "A", "E", "O", "U", "Q", "B", "F", "H", "G",
+            "Star", "Imperial", "Rebel", "Shadow", "Aegis", "Eclipse",
+            "Crimson", "Iron", "Storm", "Vanguard", "Solar"
+    };
+
+    private static final String[] SHIP_SUFFIXES = {
+            "Destroyer", "Carrier", "Frigate", "Gunship", "Interceptor",
+            "Cruiser", "Corvette", "Bomber", "Assault", "Commander",
+            "ar", "on", "a", "is", "or", "en", "ex"
+    };
+
+    private static final String[] SHIP_MIDDLE = {
+            "-Class", "-Fleet", "-Array", "-Squadron", "-Legion",
+            "-V", "-X", "-Delta", "-Omega", "-Prime", "-Alpha",
+            "-Beta", "-Gamma", "-Zeta", "-Nexus", "-Command"
+    };
+
+    public String generateShipName() {
+        Random rand = new Random();
+        String prefix = SHIP_PREFIXES[rand.nextInt(SHIP_PREFIXES.length)];
+        String suffix = SHIP_SUFFIXES[rand.nextInt(SHIP_SUFFIXES.length)];
+        String middle = SHIP_MIDDLE[rand.nextInt(SHIP_MIDDLE.length)];
+        int number = rand.nextInt(100);
+        return prefix + suffix + middle + (number > 0 ? "-" + number : "");
+    }
 
 }

@@ -1,4 +1,4 @@
-package cmd.starwars.universe.services;
+package cmd.starwars.universe.services.data;
 
 import cmd.starwars.universe.repo.AllegianceRepository;
 import cmd.starwars.universe.repo.entities.Allegiance;
@@ -26,6 +26,11 @@ public class AllegianceService {
 
     public Allegiance findById(long allegianceId) {
         return allegiances.findById(allegianceId)
+                .orElse(null);
+    }
+
+    public Allegiance findByName(String name) {
+        return allegiances.findAllegianceByName(name)
                 .orElse(null);
     }
 

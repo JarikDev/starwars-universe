@@ -1,6 +1,5 @@
-package cmd.starwars.universe.services.impl;
+package cmd.starwars.universe.services.data;
 
-import cmd.starwars.universe.services.EntityService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

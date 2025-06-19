@@ -9,25 +9,30 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Trooper {
+public class Unit {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column
     private String name;
-    @Column
-    private int classId;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "unit_class_id", referencedColumnName = "id")
+    private UnitClass unitClass;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
     private Allegiance allegiance;
     @ManyToOne
     @JoinColumn(name = "planet_id", referencedColumnName = "id")
     private Planet planet;
+    @ManyToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
 
-    public Trooper(String name, int classId, Allegiance allegiance, Planet planet) {
+    public Unit(String name, UnitClass unitClass, Allegiance allegiance, Planet planet, Status status) {
         this.name = name;
-        this.classId = classId;
+        this.unitClass = unitClass;
         this.allegiance = allegiance;
         this.planet = planet;
+        this.status = status;
     }
 }

@@ -1,6 +1,4 @@
-package cmd.starwars.universe.services;
-
-import cmd.starwars.universe.repo.entities.Hero;
+package cmd.starwars.universe.services.data;
 
 import java.util.List;
 

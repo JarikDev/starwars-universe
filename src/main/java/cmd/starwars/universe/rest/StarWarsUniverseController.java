@@ -2,7 +2,7 @@ package cmd.starwars.universe.rest;
 
 import cmd.starwars.universe.model.ShipDto;
 import cmd.starwars.universe.repo.entities.*;
-import cmd.starwars.universe.services.EntityService;
+import cmd.starwars.universe.services.data.EntityService;
 import cmd.starwars.universe.services.UniverseGeneratorService;
 import cmd.starwars.universe.services.mappers.EntityMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class StarWarsUniverseController {
     private final EntityService<ShipClass> shipClass;
     private final EntityService<Ship> ships;
     private final EntityService<StarSystem> starSystems;
-    private final EntityService<Trooper> troopers;
+    private final EntityService<Unit> troopers;
     private final UniverseGeneratorService generator;
 
     @Autowired
@@ -35,7 +35,7 @@ public class StarWarsUniverseController {
                                       EntityService<ShipClass> shipClass,
                                       EntityService<Ship> ships,
                                       EntityService<StarSystem> starSystems,
-                                      EntityService<Trooper> troopers, UniverseGeneratorService generator) {
+                                      EntityService<Unit> troopers, UniverseGeneratorService generator) {
         this.alleginaces = alleginaces;
         this.heroes = heroes;
         this.planets = planets;
@@ -65,8 +65,5 @@ public class StarWarsUniverseController {
     public void generate() {
         log.info("generate request");
         generator.generate();
-//        StarSystem system = new StarSystem(StarSystems.CORUSCANT_SYSTEM.getName(), Collections.emptyList(), Collections.emptyList());
-//        Ship ship = new Ship("Yamato", 1, 1000.0f, 50.0f, 100.0f, system);
-//        ships.save(ship);
     }
 }

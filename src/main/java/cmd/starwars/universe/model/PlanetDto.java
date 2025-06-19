@@ -13,7 +13,7 @@ import java.util.List;
 public class PlanetDto {
     private Long id;
     private String name;
-    private StarSystem starSystem;
+//    private StarSystemDto starSystem;
 //    private List<HeroDto> heroes;
 //    private List<TrooperDto> troopers;
 }
