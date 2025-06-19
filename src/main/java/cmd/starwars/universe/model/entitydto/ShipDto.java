@@ -1,4 +1,4 @@
-package cmd.starwars.universe.model;
+package cmd.starwars.universe.model.entitydto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,14 +14,14 @@ public class ShipDto {
     private float hp;
     private float dpsMin;
     private float dpsMax;
-//    private StarSystemDto starSystem;
+    private StarSystemDto starSystem;
 
-    public ShipDto(String name, int shipClass, float hp, float dpsMin, float dpsMax ) {
+    public ShipDto(String name, int shipClass, float hp, float dpsMin, float dpsMax, StarSystemDto starSystemDto) {
         this.name = name;
         this.shipClass = shipClass;
         this.hp = hp;
         this.dpsMin = dpsMin;
         this.dpsMax = dpsMax;
-//        this.starSystem = starSystemDto;
+        this.starSystem = starSystemDto;
     }
 }

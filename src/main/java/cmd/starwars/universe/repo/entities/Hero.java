@@ -1,5 +1,6 @@
 package cmd.starwars.universe.repo.entities;
 
+import cmd.starwars.universe.model.units.Attackable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Hero {
+public class Hero implements Attackable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -23,6 +24,8 @@ public class Hero {
     private float dpsMin;
     @Column
     private float dpsMax;
+    @Column
+    private double totalDamage;
     @ManyToOne
     @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
     private Allegiance allegiance;
@@ -30,7 +33,7 @@ public class Hero {
     @JoinColumn(name = "planet_id", referencedColumnName = "id")
     private Planet planet;
     @ManyToOne
-    @JoinColumn(name="status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     public Hero(String name,
@@ -49,5 +52,10 @@ public class Hero {
         this.allegiance = allegiance;
         this.planet = planet;
         this.status = status;
+    }
+
+    @Override
+    public float getDamage() {
+        return getDamage(dpsMin, dpsMax);
     }
 }

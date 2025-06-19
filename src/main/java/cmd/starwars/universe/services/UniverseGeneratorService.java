@@ -13,39 +13,36 @@ import java.util.List;
 
 @Service
 public class UniverseGeneratorService {
-    private final AllegianceService alleginaces;
+    private final AllegianceService allegiances;
     private final StatusService statuses;
     private final ShipClassService shipClasses;
     private final UnitClassService unitClasses;
     private final HeroService heroes;
     private final PlanetService planets;
-    private final ShipClassService shipClass;
     private final ShipService ships;
     private final StarSystemService starSystems;
-    private final TrooperService troopers;
+    private final UnitService troopers;
     private final RandomElement randomElement;
     private final KafkaSender kafkaSender;
     private final NameGenerator nameGenerator;
     private final TopicsConfig topics;
 
     @Autowired
-    public UniverseGeneratorService(AllegianceService alleginaces,
+    public UniverseGeneratorService(AllegianceService allegiances,
                                     StatusService statuses,
                                     ShipClassService shipClasses,
                                     UnitClassService unitClasses,
                                     HeroService heroes,
                                     PlanetService planets,
-                                    ShipClassService shipClass,
                                     ShipService ships,
                                     StarSystemService starSystems,
-                                    TrooperService troopers, KafkaSender kafkaSender, NameGenerator nameGenerator, TopicsConfig topics) {
-        this.alleginaces = alleginaces;
+                                    UnitService troopers, KafkaSender kafkaSender, NameGenerator nameGenerator, TopicsConfig topics) {
+        this.allegiances = allegiances;
         this.statuses = statuses;
         this.shipClasses = shipClasses;
         this.unitClasses = unitClasses;
         this.heroes = heroes;
         this.planets = planets;
-        this.shipClass = shipClass;
         this.ships = ships;
         this.starSystems = starSystems;
         this.troopers = troopers;
@@ -70,7 +67,7 @@ public class UniverseGeneratorService {
     private void generateAllegiances() {
         for (Allegiances a : Allegiances.values()) {
             Allegiance allegiance = new Allegiance(a.name());
-            alleginaces.save(allegiance);
+            allegiances.save(allegiance);
             kafkaSender.sendMessage("created allegiance " + allegiance.getName(), topics.getCreationTopic());
         }
     }
@@ -85,7 +82,7 @@ public class UniverseGeneratorService {
 
     private void generateShipClasses() {
         for (ShipClasses s : ShipClasses.values()) {
-            Allegiance allegiance = alleginaces.findByName(s.getAllegiance().name());
+            Allegiance allegiance = allegiances.findByName(s.getAllegiance().name());
             ShipClass shipClass = new ShipClass(s.getName(), allegiance, s.getHp(), s.getDpsMin(), s.getDpsMax());
             shipClasses.save(shipClass);
             kafkaSender.sendMessage("created ship class " + shipClass.getName(), topics.getCreationTopic());
@@ -94,7 +91,7 @@ public class UniverseGeneratorService {
 
     private void generateUnitClasses() {
         for (UnitClasses u : UnitClasses.values()) {
-            Allegiance allegiance = alleginaces.findByName(u.getAllegiance().name());
+            Allegiance allegiance = allegiances.findByName(u.getAllegiance().name());
             UnitClass unitClass = new UnitClass(u.getName(), allegiance, u.getHp(), u.getDpsMin(), u.getDpsMax());
             unitClasses.save(unitClass);
             kafkaSender.sendMessage("created unit class " + unitClass.getName(), topics.getCreationTopic());
@@ -102,7 +99,7 @@ public class UniverseGeneratorService {
     }
 
     private void generateStarSystems() {
-        List<Allegiance> allegianceList = alleginaces.findAll();
+        List<Allegiance> allegianceList = allegiances.findAll();
         for (StarSystems s : StarSystems.values()) {
             StarSystem system = new StarSystem(s.name(), randomElement.get(allegianceList));
             starSystems.save(system);
@@ -111,9 +108,9 @@ public class UniverseGeneratorService {
     }
 
     private void generatePlanets() {
-        List<Allegiance> allegianceList = alleginaces.findAll();
+        List<Allegiance> allegianceList = allegiances.findAll();
         for (StarSystems s : StarSystems.values()) {
-            StarSystem system = starSystems.findByName(s.name());
+            StarSystem system = starSystems.findAll(s.name());
             for (Planets p : s.getPlanets()) {
                 Planet planet = new Planet(p.name(), system, randomElement.get(allegianceList));
                 planets.save(planet);
@@ -125,7 +122,7 @@ public class UniverseGeneratorService {
     private void generateHeroes() {
         Status active = statuses.findByName(Statuses.ACTIVE.name());
         for (Heroes h : Heroes.values()) {
-            Allegiance allegiance = alleginaces.findByName(h.getAllegiance().name());
+            Allegiance allegiance = allegiances.findByName(h.getAllegiance().name());
             List<Planet> planetList = planets.findAll(allegiance);
             Hero hero = new Hero(h.getName(), h.getHp(), h.getBuff(), h.getDpsMin(), h.getDpsMax(), allegiance, randomElement.get(planetList), active);
             heroes.save(hero);
@@ -135,11 +132,12 @@ public class UniverseGeneratorService {
 
     private void generateFleet() {
         Status active = statuses.findByName(Statuses.ACTIVE.name());
-        for (Allegiance allegiance : alleginaces.findAll()) {
+        for (Allegiance allegiance : allegiances.findAll()) {
             List<StarSystem> starSystemList = starSystems.findAll(allegiance);
             List<ShipClass> shipClassList = shipClasses.findByAllegiance(allegiance);
             for (int i = 0; i < 1000; i++) {
-                Ship ship = new Ship(nameGenerator.generateShipName(), randomElement.get(shipClassList), randomElement.get(starSystemList), active);
+                ShipClass shipClass = randomElement.get(shipClassList);
+                Ship ship = new Ship(nameGenerator.generateShipName(), shipClass.getHp(), shipClass, randomElement.get(starSystemList), active);
                 ships.save(ship);
                 kafkaSender.sendMessage("created ship " + ship.getName() + " allegiance " + allegiance.getName(), topics.getCreationTopic());
             }
@@ -148,11 +146,12 @@ public class UniverseGeneratorService {
 
     private void generateUnits() {
         Status active = statuses.findByName(Statuses.ACTIVE.name());
-        for (Allegiance allegiance : alleginaces.findAll()) {
+        for (Allegiance allegiance : allegiances.findAll()) {
             List<Planet> planetList = planets.findAll(allegiance);
             List<UnitClass> unitClassList = unitClasses.findByAllegiance(allegiance);
             for (int i = 0; i < 1000; i++) {
-                Unit unit = new Unit(nameGenerator.generateTrooperName(), randomElement.get(unitClassList), allegiance, randomElement.get(planetList), active);
+                UnitClass unitClass = randomElement.get(unitClassList);
+                Unit unit = new Unit(nameGenerator.generateTrooperName(), unitClass.getHp(), unitClass, allegiance, randomElement.get(planetList), active);
                 troopers.save(unit);
                 kafkaSender.sendMessage("created unit " + unit.getName() + " allegiance " + allegiance.getName(), topics.getCreationTopic());
             }

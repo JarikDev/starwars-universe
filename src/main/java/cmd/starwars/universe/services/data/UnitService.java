@@ -1,6 +1,7 @@
 package cmd.starwars.universe.services.data;
 
-import cmd.starwars.universe.repo.TrooperRepository;
+import cmd.starwars.universe.repo.UnitRepository;
+import cmd.starwars.universe.repo.entities.Planet;
 import cmd.starwars.universe.repo.entities.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,11 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TrooperService {
-    private final TrooperRepository troopers;
+public class UnitService {
+    private final UnitRepository troopers;
 
     @Autowired
-    public TrooperService(TrooperRepository troopers) {
+    public UnitService(UnitRepository troopers) {
         this.troopers = troopers;
     }
 
@@ -31,5 +32,9 @@ public class TrooperService {
 
     public List<Unit> findAll() {
         return troopers.findAll();
+    }
+
+    public List<Unit> findAll(Planet planet) {
+        return troopers.findAllByPlanet(planet);
     }
 }

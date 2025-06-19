@@ -20,7 +20,14 @@ spring:
       testTopic: test_topic
       creationTopic: creation_topic
       destructionTopic: destruction_topic
-
+      actionTopic: action_topic
+      groupId: star_wars_universe_listener
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.value.default.type: cmd.starwars.universe.model.messages.ActionMessage
+        spring.json.trusted.packages: cmd.starwars.universe.model.messages
 logging:
   level:
     org.hibernate.SQL: DEBUG

@@ -1,4 +1,4 @@
-package cmd.starwars.universe.model;
+package cmd.starwars.universe.model.entitydto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AllegianceDto {
+public class UnitDto {
     private Long id;
     private String name;
+    private int classId;
 }

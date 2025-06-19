@@ -30,7 +30,7 @@ public class StarSystemService {
                 .orElse(null);
     }
 
-    public StarSystem findByName(String name) {
+    public StarSystem findAll(String name) {
         return starSystems.findStarSystemByName(name)
                 .orElse(null);
     }

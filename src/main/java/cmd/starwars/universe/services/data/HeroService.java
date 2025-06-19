@@ -2,6 +2,7 @@ package cmd.starwars.universe.services.data;
 
 import cmd.starwars.universe.repo.HeroRepository;
 import cmd.starwars.universe.repo.entities.Hero;
+import cmd.starwars.universe.repo.entities.Planet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,9 @@ public class HeroService {
 
     public List<Hero> findAll() {
         return heroes.findAll();
+    }
+
+    public List<Hero> findAll(Planet planet) {
+        return heroes.findAllByPlanet(planet);
     }
 }

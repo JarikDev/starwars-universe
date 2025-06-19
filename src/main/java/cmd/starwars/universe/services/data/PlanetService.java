@@ -3,6 +3,7 @@ package cmd.starwars.universe.services.data;
 import cmd.starwars.universe.repo.PlanetRepository;
 import cmd.starwars.universe.repo.entities.Allegiance;
 import cmd.starwars.universe.repo.entities.Planet;
+import cmd.starwars.universe.repo.entities.StarSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +35,13 @@ public class PlanetService {
         return planets.findAll();
     }
 
-    public Planet findPlanetByName(String name) {
+    public Planet findByName(String name) {
         return planets.findPlanetByName(name)
                 .orElse(null);
+    }
+
+    public List<Planet> findAll(StarSystem starSystem) {
+        return planets.findAllByStarSystem(starSystem) ;
     }
 
     public List<Planet> findAll(Allegiance allegiance) {

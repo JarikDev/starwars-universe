@@ -2,6 +2,7 @@ package cmd.starwars.universe.services.data;
 
 import cmd.starwars.universe.repo.ShipRepository;
 import cmd.starwars.universe.repo.entities.Ship;
+import cmd.starwars.universe.repo.entities.StarSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,10 @@ public class ShipService {
     public Ship findById(long shipId) {
         return ships.findById(shipId)
                 .orElse(null);
+    }
+
+    public List<Ship> findAll(StarSystem starSystem) {
+        return ships.findAllByStarSystem(starSystem);
     }
 
     public List<Ship> findAll() {

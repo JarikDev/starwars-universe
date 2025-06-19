@@ -3,6 +3,7 @@ package cmd.starwars.universe.services.data;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EntityServiceImpl<T> implements EntityService<T> {
     private final JpaRepository<T, Long> repo;

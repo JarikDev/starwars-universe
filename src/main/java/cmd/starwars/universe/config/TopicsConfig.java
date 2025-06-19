@@ -13,4 +13,5 @@ public class TopicsConfig {
     private String testTopic;
     private String creationTopic;
     private String destructionTopic;
+    private String actionTopic;
 }
