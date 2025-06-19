@@ -18,12 +18,16 @@ public class Trooper {
     @Column
     private int classId;
     @ManyToOne
+    @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
+    private Allegiance allegiance;
+    @ManyToOne
     @JoinColumn(name = "planet_id", referencedColumnName = "id")
     private Planet planet;
 
-    public Trooper(String name, int classId, Planet planet) {
+    public Trooper(String name, int classId, Allegiance allegiance, Planet planet) {
         this.name = name;
         this.classId = classId;
+        this.allegiance = allegiance;
         this.planet = planet;
     }
 }

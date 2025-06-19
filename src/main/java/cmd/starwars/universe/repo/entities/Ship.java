@@ -23,16 +23,20 @@ public class Ship {
     private float dpsMin;
     @Column
     private float dpsMax;
+    @ManyToOne
+    @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
+    private Allegiance allegiance;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "star_system_id", referencedColumnName = "id")
     private StarSystem starSystem;
 
-    public Ship(String name, int shipClass, float hp, float dpsMin, float dpsMax, StarSystem starSystem) {
+    public Ship(String name, int shipClass, float hp, float dpsMin, float dpsMax,Allegiance allegiance, StarSystem starSystem) {
         this.name = name;
         this.shipClass = shipClass;
         this.hp = hp;
         this.dpsMin = dpsMin;
         this.dpsMax = dpsMax;
+        this.allegiance = allegiance;
         this.starSystem = starSystem;
     }
 }

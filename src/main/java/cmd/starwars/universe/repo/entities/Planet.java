@@ -20,14 +20,18 @@ public class Planet {
     @ManyToOne
     @JoinColumn(name = "star_system_id", referencedColumnName = "id")
     private StarSystem starSystem;
+    @ManyToOne
+    @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
+    private Allegiance allegiance;
     @OneToMany(mappedBy = "planet", cascade = CascadeType.PERSIST)
     private List<Hero> heroes;
     @OneToMany(mappedBy = "planet", cascade = CascadeType.PERSIST)
     private List<Trooper> troopers;
 
-    public Planet(String name, StarSystem starSystem, List<Hero> heroes, List<Trooper> troopers) {
+    public Planet(String name, StarSystem starSystem, Allegiance allegiance, List<Hero> heroes, List<Trooper> troopers) {
         this.name = name;
         this.starSystem = starSystem;
+        this.allegiance = allegiance;
         this.heroes = heroes;
         this.troopers = troopers;
     }

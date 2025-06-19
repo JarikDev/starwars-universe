@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum Allegiances {
+    NEUTRAL("Neutral"),
     SEPARATIST("Separatist"),
     REPUBLIC("Republic"),
     JEDI("Jedi"),
