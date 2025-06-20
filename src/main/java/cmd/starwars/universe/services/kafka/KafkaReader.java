@@ -17,29 +17,37 @@ public class KafkaReader {
         this.handler = handler;
     }
 
-//    @KafkaListener(topics = "${spring.kafka.topics.testTopic}", groupId = "${spring.kafka.topics.groupId}")
-//    void testTopicListener(String msg) {
-//        log.info("Received message [{}] in testTopic", msg);
-//    }
-//
-//    @KafkaListener(topics = "${spring.kafka.topics.creationTopic}", groupId = "${spring.kafka.topics.groupId}")
-//    void creationTopicListener(String msg) {
-//        log.info("Received message [{}] in creationTopic", msg);
-//    }
-//
-//    @KafkaListener(topics = "${spring.kafka.topics.destructionTopic}", groupId = "${spring.kafka.topics.groupId}")
-//    void destructionTopicListener(String msg) {
-//        log.info("Received message [{}] in destructionTopic", msg);
-//    }
+    @KafkaListener(topics = "${spring.kafka.topics.testTopic}",
+            groupId = "${spring.kafka.groupId}",
+            containerFactory = "stringListenerFactory")
+    void testTopicListener(String msg) {
+        log.info("Received message [{}] in testTopic", msg);
+    }
 
-    @KafkaListener(topics = "${spring.kafka.topics.actionTopic}", groupId = "${spring.kafka.topics.groupId}")
+    @KafkaListener(topics = "${spring.kafka.topics.creationTopic}",
+            groupId = "${spring.kafka.groupId}",
+            containerFactory = "stringListenerFactory")
+    void creationTopicListener(String msg) {
+        log.info("Received message [{}] in creationTopic", msg);
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topics.destructionTopic}",
+            groupId = "${spring.kafka.groupId}",
+            containerFactory = "stringListenerFactory")
+    void destructionTopicListener(String msg) {
+        log.info("Received message [{}] in destructionTopic", msg);
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topics.actionTopic}",
+            groupId = "${spring.kafka.groupId}",
+            containerFactory = "actionListenerFactory")
     void actionTopicListener(ActionMessage msg) {
         log.info("Received message [{}] in actionTopic", msg);
 
         try {
             handler.handle(msg);
         } catch (Exception e) {
-            log.error("error handling action msg", e);
+            log.error("error handling action msg {}", e.getMessage());
         }
     }
 }

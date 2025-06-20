@@ -15,13 +15,13 @@ spring:
     console:
       enabled: true
   kafka:
-    bootstrap-servers: localhost:9094
+    bootstrapServers: localhost:9094
+    groupId: star_wars_universe_listener
     topics:
       testTopic: test_topic
       creationTopic: creation_topic
       destructionTopic: destruction_topic
       actionTopic: action_topic
-      groupId: star_wars_universe_listener
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
