@@ -13,7 +13,9 @@ public class HeroReport {
     private long id;
     private String name;
     private String allegiance;
+    private String planet;
     private float hp;
+    private float buff;
     private double totalDamage;
     private String status;
 }

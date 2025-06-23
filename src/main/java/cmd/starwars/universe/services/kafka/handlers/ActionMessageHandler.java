@@ -16,7 +16,6 @@ public class ActionMessageHandler {
     private final StatusService statuses;
     private final ShipClassService shipClasses;
     private final UnitClassService unitClasses;
-    private final HeroService heroes;
     private final PlanetService planets;
     private final ShipService ships;
     private final StarSystemService starSystems;
@@ -27,7 +26,6 @@ public class ActionMessageHandler {
                                 StatusService statuses,
                                 ShipClassService shipClasses,
                                 UnitClassService unitClasses,
-                                HeroService heroes,
                                 PlanetService planets,
                                 ShipService ships,
                                 StarSystemService starSystems,
@@ -36,7 +34,6 @@ public class ActionMessageHandler {
         this.statuses = statuses;
         this.shipClasses = shipClasses;
         this.unitClasses = unitClasses;
-        this.heroes = heroes;
         this.planets = planets;
         this.ships = ships;
         this.starSystems = starSystems;
@@ -45,9 +42,6 @@ public class ActionMessageHandler {
 
     public void handle(ActionMessage msg) {
         switch (msg.getUnitClass()) {
-            case "HERO":
-                handleHeroAction(msg);
-                break;
             case "SHIP":
                 handleShipAction(msg);
                 break;
@@ -57,49 +51,6 @@ public class ActionMessageHandler {
             default:
                 throw new RuntimeException("Unknown class: " + msg.getUnitClass());
         }
-    }
-
-    private void handleHeroAction(ActionMessage msg) {
-        log.info("handled HeroAction");
-        switch (msg.getAction()) {
-            case Actions.ATTACK:
-                handleHeroAttack(msg);
-            case Actions.MOVE:
-                handleHeroMove(msg);
-            default:
-                throw new RuntimeException("Unknown action: " + msg.getAction());
-        }
-    }
-
-    private void handleHeroAttack(ActionMessage msg) {
-        Hero attacker = heroes.findById(msg.getUnitId());
-        float dmg = attacker.getDamage();
-        if ("HERO".equals(msg.getTargetClass())) {
-            Hero target = heroes.findById(msg.getTargetId());
-            target.setHp(target.getHp() - dmg);
-            if (target.getHp() < 0) {
-                Status destroyed = statuses.findByName(Statuses.DESTROYED.name());
-                target.setStatus(destroyed);
-            }
-            heroes.save(target);
-        } else {
-            Unit target = units.findById(msg.getTargetId());
-            target.setHp(target.getHp() - dmg);
-            if (target.getHp() < 0) {
-                Status destroyed = statuses.findByName(Statuses.DESTROYED.name());
-                target.setStatus(destroyed);
-            }
-            units.save(target);
-        }
-        attacker.setTotalDamage(attacker.getTotalDamage() + dmg);
-        heroes.save(attacker);
-    }
-
-    private void handleHeroMove(ActionMessage msg) {
-        Hero hero = heroes.findById(msg.getUnitId());
-        Planet planet = planets.findById(msg.getTargetId());
-        hero.setPlanet(planet);
-        heroes.save(hero);
     }
 
     private void handleShipAction(ActionMessage msg) {
@@ -152,23 +103,13 @@ public class ActionMessageHandler {
     private void handleUnitAttack(ActionMessage msg) {
         Unit attacker = units.findById(msg.getUnitId());
         float dmg = attacker.getDamage();
-        if ("HERO".equals(msg.getTargetClass())) {
-            Hero target = heroes.findById(msg.getTargetId());
-            target.setHp(target.getHp() - dmg);
-            if (target.getHp() < 0) {
-                Status destroyed = statuses.findByName(Statuses.DESTROYED.name());
-                target.setStatus(destroyed);
-            }
-            heroes.save(target);
-        } else {
-            Unit target = units.findById(msg.getTargetId());
-            target.setHp(target.getHp() - dmg);
-            if (target.getHp() < 0) {
-                Status destroyed = statuses.findByName(Statuses.DESTROYED.name());
-                target.setStatus(destroyed);
-            }
-            units.save(target);
+        Unit target = units.findById(msg.getTargetId());
+        target.setHp(target.getHp() - dmg);
+        if (target.getHp() < 0) {
+            Status destroyed = statuses.findByName(Statuses.DESTROYED.name());
+            target.setStatus(destroyed);
         }
+        units.save(target);
         attacker.setTotalDamage(attacker.getTotalDamage() + dmg);
         units.save(attacker);
     }

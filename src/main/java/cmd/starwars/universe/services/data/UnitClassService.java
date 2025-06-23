@@ -30,6 +30,11 @@ public class UnitClassService {
                 .orElse(null);
     }
 
+    public UnitClass findByName(String unitClassName) {
+        return unitClasses.findUnitClassByName(unitClassName)
+                .orElse(null);
+    }
+
     public List<UnitClass> findByAllegiance(Allegiance allegiance) {
         return unitClasses.findUnitClassesByAllegiance(allegiance);
     }

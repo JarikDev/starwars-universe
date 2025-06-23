@@ -4,66 +4,59 @@ import lombok.Getter;
 
 @Getter
 public enum Heroes {
-    JEDI_MASTER_YODA("Jedi Master Yoda", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_MACE_WINDU("Jedi Master Mace Windu", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_OBI_WAN_KENOBI("Jedi Master Obi-Wan Kenobi", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_ANAKIN_SKYWALKER("Jedi Anakin Skywalker", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_A_SHARAD_HETT("Jedi A'Sharad Hett", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_PADAWAN_AHSOKA_TANO("Jedi Padawan Ahsoka Tano", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_KIT_FISTO("Jedi Master Kit Fisto", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_EVEN_PIELL("Jedi Master Even Piell", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_KI_ADI_MUNDI("Jedi Master Ki-Adi-Mundi", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_SHAAK_TI("Jedi Master Shaak Ti", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_AAYLA_SECURA("Jedi Master Aayla Secura", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_TIPLEE("Jedi Master Tiplee", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_LUMINARA_UNDULI("Jedi Master Luminara Unduli", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_PADAWAN_BARRISS_OFFEE("Jedi Padawan Barriss Offee", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_QUINLAN_VOS("Jedi Master Quinlan Vos", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_DEPA_BILLABA("Jedi Master Depa Billaba", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    JEDI_MASTER_RAHM_KOTA("Jedi Master Rahm Kota", Allegiances.REPUBLIC,100.0f,50.0f,100.0f,1.3f),
-    CLONE_TROOPER_CAPTAIN_REX("Clone Trooper Captain Rex", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_COMMANDER_CODY("Clone Trooper Commander Cody", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_COMMANDER_WOLFFE("Clone Trooper Commander Wolffe", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_COMMANDER_GREE("Clone Trooper Commander Gree", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_COMMANDER_BLY("Clone Trooper Commander Bly", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_FIVES("Clone Trooper Fives", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_ECHO("Clone Trooper Echo", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_HEVY("Clone Trooper Hevy", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_99("Clone Trooper 99", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    CLONE_TROOPER_HARDCASE("Clone Trooper Hardcase", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    PADME_AMIDALA("Padme Amidala", Allegiances.REPUBLIC,100.0f,10.0f,34.0f,1.3f),
-    ASAJJ_VENTRESS("Asajj Ventress", Allegiances.SEPARATIST,100.0f,50.0f,100.0f,1.3f),
-    MANDALORIAN_BO_KATAN_KRYZE("Mandalorian Bo-Katan Kryze", Allegiances.SEPARATIST,100.0f,20.0f,34.0f,1.3f),
-    PIRATE_HONDO_OHNAKA("Pirate Hondo Ohnaka", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    LUX_BONTERI("Lux Bonteri", Allegiances.SEPARATIST,100.0f,10.0f,34.0f,1.3f),
-    COUNT_DOOKU_DARTH_TYRANUS("Count Dooku Darth Tyranus", Allegiances.SEPARATIST,100.0f,50.0f,100.0f,1.3f),
-    SENATOR_MINA_BONTERI("Senator Mina Bonteri", Allegiances.SEPARATIST,100.0f,10.0f,34.0f,1.3f),
-    PASSEL_ARGENTE("Passel Argente", Allegiances.SEPARATIST,100.0f,10.0f,34.0f,1.3f),
-    TIKKES("Tikkes", Allegiances.SEPARATIST,100.0f,20.0f,34.0f,1.3f),
-    GENERAL_KALANI("General Kalani", Allegiances.SEPARATIST,100.0f,20.0f,34.0f,1.3f),
-    CHAM_SYNDULLA("Cham Syndulla", Allegiances.REPUBLIC,100.0f,20.0f,34.0f,1.3f),
-    SORA_BULQ("Sora Bulq", Allegiances.SEPARATIST,100.0f,50.0f,100.0f,1.3f),
-    DARCA_NYL("Darca Nyl", Allegiances.SEPARATIST,100.0f,20.0f,34.0f,1.3f),
-    KERN("Kern", Allegiances.SEPARATIST,100.0f,20.0f,34.0f,1.3f),
-    VIEN_NAI("Vien'nai", Allegiances.SEPARATIST,100.0f,20.0f,34.0f,1.3f),
-    CAD_BANE("Cad Bane", Allegiances.SEPARATIST,100.0f,20.0f,34.0f,1.3f),
-    EMBO("Embo", Allegiances.SEPARATIST,100.0f,20.0f,34.0f,1.3f),
+    JEDI_MASTER_YODA("Yoda", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_MACE_WINDU("Mace Windu", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_OBI_WAN_KENOBI("Obi-Wan Kenobi", UnitClasses.JEDI_MASTER),
+    JEDI_ANAKIN_SKYWALKER("Jedi Anakin Skywalker", UnitClasses.JEDI_KNIGHT),
+    JEDI_A_SHARAD_HETT("Jedi A'Sharad Hett", UnitClasses.JEDI_KNIGHT),
+    JEDI_PADAWAN_AHSOKA_TANO("Jedi Padawan Ahsoka Tano", UnitClasses.JEDI_PADAWAN),
+    JEDI_MASTER_KIT_FISTO("Jedi Master Kit Fisto", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_EVEN_PIELL("Jedi Master Even Piell", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_KI_ADI_MUNDI("Jedi Master Ki-Adi-Mundi", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_SHAAK_TI("Jedi Master Shaak Ti", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_AAYLA_SECURA("Jedi Master Aayla Secura", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_TIPLEE("Jedi Master Tiplee", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_LUMINARA_UNDULI("Jedi Master Luminara Unduli", UnitClasses.JEDI_MASTER),
+    JEDI_PADAWAN_BARRISS_OFFEE("Jedi Padawan Barriss Offee", UnitClasses.JEDI_PADAWAN),
+    JEDI_MASTER_QUINLAN_VOS("Jedi Master Quinlan Vos", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_DEPA_BILLABA("Jedi Master Depa Billaba", UnitClasses.JEDI_MASTER),
+    JEDI_MASTER_RAHM_KOTA("Jedi Master Rahm Kota", UnitClasses.JEDI_MASTER),
+    CLONE_TROOPER_CAPTAIN_REX("Clone Trooper Captain Rex", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_COMMANDER_CODY("Clone Trooper Commander Cody", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_COMMANDER_WOLFFE("Clone Trooper Commander Wolffe", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_COMMANDER_GREE("Clone Trooper Commander Gree", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_COMMANDER_BLY("Clone Trooper Commander Bly", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_FIVES("Clone Trooper Fives", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_ECHO("Clone Trooper Echo", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_HEVY("Clone Trooper Hevy", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_99("Clone Trooper 99", UnitClasses.CLONE_COMMANDO),
+    CLONE_TROOPER_HARDCASE("Clone Trooper Hardcase", UnitClasses.CLONE_COMMANDO),
+    PADME_AMIDALA("Padme Amidala", UnitClasses.DIPLOMAT),
+    CHAM_SYNDULLA("Cham Syndulla", UnitClasses.DIPLOMAT),
+
+    ASAJJ_VENTRESS("Asajj Ventress", UnitClasses.SITH),
+    MANDALORIAN_BO_KATAN_KRYZE("Mandalorian Bo-Katan Kryze", UnitClasses.MANDALORIAN),
+    PIRATE_HONDO_OHNAKA("Pirate Hondo Ohnaka", UnitClasses.PIRATE),
+    LUX_BONTERI("Lux Bonteri", UnitClasses.SEPARATIST_POLITICIAN),
+    COUNT_DOOKU_DARTH_TYRANUS("Count Dooku Darth Tyranus", UnitClasses.SITH),
+    SENATOR_MINA_BONTERI("Senator Mina Bonteri", UnitClasses.SEPARATIST_POLITICIAN),
+    PASSEL_ARGENTE("Passel Argente", UnitClasses.SEPARATIST_POLITICIAN),
+    TIKKES("Tikkes", UnitClasses.SEPARATIST_POLITICIAN),
+    GENERAL_KALANI("General Kalani", UnitClasses.SEPARATIST_GENERAL),
+    SORA_BULQ("Sora Bulq", UnitClasses.SITH),
+    DARCA_NYL("Darca Nyl", UnitClasses.SITH),
+    KERN("Kern", UnitClasses.INSURGENT),
+    VIEN_NAI("Vien'nai", UnitClasses.INSURGENT),
+    CAD_BANE("Cad Bane", UnitClasses.MERCENARY),
+    EMBO("Embo", UnitClasses.MERCENARY),
     ;
 
     private final String name;
-    private final Allegiances allegiance;
-    private final float hp;
-    private final float dpsMin;
-    private final float dpsMax;
-    private final float buff;
+    private final UnitClasses unitClass;
 
-    Heroes(String name, Allegiances allegiance, float hp, float dpsMin, float dpsMax, float buff) {
+    Heroes(String name, UnitClasses unitClass) {
         this.name = name;
-        this.allegiance = allegiance;
-        this.hp = hp;
-        this.dpsMin = dpsMin;
-        this.dpsMax = dpsMax;
-        this.buff = buff;
+        this.unitClass = unitClass;
     }
 }
 

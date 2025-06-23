@@ -24,6 +24,8 @@ public class UnitClass {
     private float dpsMin;
     @Column
     private float dpsMax;
+    @Column
+    private float buff;
 
     public UnitClass(String name, Allegiance allegiance, float hp, float dpsMin, float dpsMax) {
         this.name = name;

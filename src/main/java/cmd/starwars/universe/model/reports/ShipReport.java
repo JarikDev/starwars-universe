@@ -14,6 +14,7 @@ public class ShipReport {
     private String name;
     private String allegiance;
     private String shipClass;
+    private String starSystem;
     private float hp;
     private double totalDamage;
     private String status;

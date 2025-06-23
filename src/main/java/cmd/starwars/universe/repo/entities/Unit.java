@@ -23,9 +23,6 @@ public class Unit implements Attackable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "unit_class_id", referencedColumnName = "id")
     private UnitClass unitClass;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "allegiance_id", referencedColumnName = "id")
-    private Allegiance allegiance;
     @ManyToOne
     @JoinColumn(name = "planet_id", referencedColumnName = "id")
     private Planet planet;
@@ -33,11 +30,10 @@ public class Unit implements Attackable {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    public Unit(String name, float hp, UnitClass unitClass, Allegiance allegiance, Planet planet, Status status) {
+    public Unit(String name, float hp, UnitClass unitClass, Planet planet, Status status) {
         this.name = name;
         this.hp = hp;
         this.unitClass = unitClass;
-        this.allegiance = allegiance;
         this.planet = planet;
         this.status = status;
     }

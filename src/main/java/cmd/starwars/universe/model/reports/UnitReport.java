@@ -14,6 +14,7 @@ public class UnitReport {
     private String name;
     private String allegiance;
     private String unitClass;
+    private String planet;
     private float hp;
     private double totalDamage;
     private String status;
