@@ -45,7 +45,7 @@ public class ReportService {
     }
 
     public StarSystemReport getStarSystemReport(String starSystemName) {
-        StarSystem system = starSystemService.findAll(starSystemName);
+        StarSystem system = starSystemService.findByName(starSystemName);
         List<Planet> planets = planetService.findAll(system);
         List<Ship> ships = shipService.findAll(system);
 
@@ -61,7 +61,7 @@ public class ReportService {
                             .map(mapper::toHeroReport)
                             .collect(Collectors.toCollection(ArrayList::new));
 
-                    return new PlanetReport(planet.getId(), planet.getName(), unitReports, heroReports);
+                    return new PlanetReport(planet.getId(), planet.getName(), planet.getAllegiance().getName(), planet.getStarSystem().getName(), unitReports, heroReports);
                 })
                 .collect(Collectors.toCollection(ArrayList::new));
 
@@ -73,7 +73,7 @@ public class ReportService {
     }
 
     public StarSystemReport getStarSystemReport(String starSystemName, String allegianceName) {
-        StarSystem system = starSystemService.findAll(starSystemName);
+        StarSystem system = starSystemService.findByName(starSystemName);
         List<Planet> planets = planetService.findAll(system);
         List<Ship> ships = shipService.findAll(system);
         Allegiance allegiance = allegianceService.findByName(allegianceName);
@@ -93,7 +93,7 @@ public class ReportService {
                             .map(mapper::toHeroReport)
                             .collect(Collectors.toCollection(ArrayList::new));
 
-                    return new PlanetReport(planet.getId(), planet.getName(), unitReports, heroReports);
+                    return new PlanetReport(planet.getId(), planet.getName(), planet.getAllegiance().getName(), planet.getStarSystem().getName(), unitReports, heroReports);
                 })
                 .collect(Collectors.toCollection(ArrayList::new));
 

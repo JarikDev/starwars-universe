@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum Allegiances {
     SEPARATIST("Separatist"),
     REPUBLIC("Republic"),
+//    CONTESTED("Contested"),
 //    NEUTRAL("Neutral"),
 //    JEDI("Jedi"),
 //    CLONE_TROOPER("Clone trooper"),

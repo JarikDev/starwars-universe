@@ -27,4 +27,11 @@ public class Planet {
         this.starSystem = starSystem;
         this.allegiance = allegiance;
     }
+
+    public Planet(Long id, String name, StarSystem starSystem, Allegiance allegiance) {
+        this.id = id;
+        this.name = name;
+        this.starSystem = starSystem;
+        this.allegiance = allegiance;
+    }
 }

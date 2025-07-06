@@ -1,8 +1,10 @@
 package cmd.starwars.universe.services.data;
 
 import cmd.starwars.universe.repo.ShipRepository;
+import cmd.starwars.universe.repo.entities.Allegiance;
 import cmd.starwars.universe.repo.entities.Ship;
 import cmd.starwars.universe.repo.entities.StarSystem;
+import cmd.starwars.universe.repo.entities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,10 @@ public class ShipService {
 
     public List<Ship> findAll(StarSystem starSystem) {
         return ships.findAllByStarSystem(starSystem);
+    }
+
+    public List<Ship> findAll(StarSystem starSystem, Allegiance allegiance, Status status) {
+        return ships.findAllByStarSystemAndStatusAndShipClassAllegiance(starSystem, status, allegiance);
     }
 
     public List<Ship> findAll() {

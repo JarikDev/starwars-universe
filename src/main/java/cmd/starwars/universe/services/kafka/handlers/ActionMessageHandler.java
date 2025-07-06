@@ -1,13 +1,21 @@
 package cmd.starwars.universe.services.kafka.handlers;
 
+import cmd.starwars.universe.model.enums.Allegiances;
+import cmd.starwars.universe.model.enums.ShipClasses;
 import cmd.starwars.universe.model.enums.Statuses;
+import cmd.starwars.universe.model.enums.UnitClasses;
 import cmd.starwars.universe.model.messages.ActionMessage;
 import cmd.starwars.universe.model.messages.Actions;
 import cmd.starwars.universe.repo.entities.*;
 import cmd.starwars.universe.services.data.*;
+import cmd.starwars.universe.services.kafka.KafkaSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -20,6 +28,9 @@ public class ActionMessageHandler {
     private final ShipService ships;
     private final StarSystemService starSystems;
     private final UnitService units;
+    private final KafkaSender sender;
+    private final List<String> unitClassesList;
+    private final List<String> shipClassesList;
 
     @Autowired
     public ActionMessageHandler(AllegianceService allegiances,
@@ -29,7 +40,7 @@ public class ActionMessageHandler {
                                 PlanetService planets,
                                 ShipService ships,
                                 StarSystemService starSystems,
-                                UnitService units) {
+                                UnitService units, KafkaSender sender) {
         this.allegiances = allegiances;
         this.statuses = statuses;
         this.shipClasses = shipClasses;
@@ -38,18 +49,30 @@ public class ActionMessageHandler {
         this.ships = ships;
         this.starSystems = starSystems;
         this.units = units;
+        this.sender = sender;
+
+        unitClassesList = Arrays.stream(UnitClasses.values()).map(UnitClasses::name).collect(Collectors.toList());
+        shipClassesList = Arrays.stream(ShipClasses.values()).map(ShipClasses::name).collect(Collectors.toList());
     }
 
     public void handle(ActionMessage msg) {
-        switch (msg.getUnitClass()) {
-            case "SHIP":
+        if (msg.getAction().equals(Actions.FINISHED)) {
+//            Allegiances allegiance = msg.getAllegiance().equals(Allegiances.REPUBLIC) ? Allegiances.SEPARATIST : Allegiances.REPUBLIC;
+            Allegiances allegiance = Allegiances.REPUBLIC;
+            ActionMessage turn_msg = new ActionMessage(allegiance, Actions.START);
+            sender.sendMessage(turn_msg, "action_topic");
+        } else if (msg.getAction().equals(Actions.START)) {
+            log.info("SOME SIDE HAS STARTED");
+        } else if (msg.getAction().equals(Actions.WON)) {
+            log.info("SOME SIDE HAS WON");
+        } else {
+            if (shipClassesList.contains(msg.getUnitClass())) {
                 handleShipAction(msg);
-                break;
-            case "UNIT":
+            } else if (unitClassesList.contains(msg.getUnitClass())) {
                 handleUnitAction(msg);
-                break;
-            default:
+            } else {
                 throw new RuntimeException("Unknown class: " + msg.getUnitClass());
+            }
         }
     }
 
@@ -58,8 +81,10 @@ public class ActionMessageHandler {
         switch (msg.getAction()) {
             case Actions.ATTACK:
                 handleShipAttack(msg);
+                break;
             case Actions.MOVE:
                 handleShipMove(msg);
+                break;
             default:
                 throw new RuntimeException("Unknown action: " + msg.getAction());
         }
@@ -67,14 +92,24 @@ public class ActionMessageHandler {
 
     private void handleShipAttack(ActionMessage msg) {
         Ship attacker = ships.findById(msg.getUnitId());
-        Ship target = ships.findById(msg.getTargetId());
         float dmg = attacker.getDamage();
-        target.setHp(target.getHp() - dmg);
-        if (target.getHp() < 0) {
-            Status destroyed = statuses.findByName(Statuses.DESTROYED.name());
-            target.setStatus(destroyed);
+        Ship target = ships.findById(msg.getTargetId());
+        if (target == null) {
+            Unit targetUnit = units.findById(msg.getTargetId());
+            targetUnit.setHp(targetUnit.getHp() - dmg);
+            if (targetUnit.getHp() < 0) {
+                Status destroyed = statuses.findByName(Statuses.DESTROYED.name());
+                targetUnit.setStatus(destroyed);
+            }
+            units.save(targetUnit);
+        } else {
+            target.setHp(target.getHp() - dmg);
+            if (target.getHp() < 0) {
+                Status destroyed = statuses.findByName(Statuses.DESTROYED.name());
+                target.setStatus(destroyed);
+            }
+            ships.save(target);
         }
-        ships.save(target);
         attacker.setTotalDamage(attacker.getTotalDamage() + dmg);
         ships.save(attacker);
     }

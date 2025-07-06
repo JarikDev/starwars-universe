@@ -14,6 +14,8 @@ import java.util.List;
 public class PlanetReport {
     private long id;
     private String name;
+    private String allegiance;
+    private String starSystem;
     private List<UnitReport> unitReports;
     private List<HeroReport> heroReports;
 }

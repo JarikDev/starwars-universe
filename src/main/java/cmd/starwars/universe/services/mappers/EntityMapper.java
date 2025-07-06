@@ -2,6 +2,7 @@ package cmd.starwars.universe.services.mappers;
 
 import cmd.starwars.universe.model.entitydto.*;
 import cmd.starwars.universe.model.reports.HeroReport;
+import cmd.starwars.universe.model.reports.PlanetReport;
 import cmd.starwars.universe.model.reports.ShipReport;
 import cmd.starwars.universe.model.reports.UnitReport;
 import cmd.starwars.universe.repo.entities.*;
@@ -47,4 +48,8 @@ public interface EntityMapper {
     @Mapping(target = "planet", source = "planet.name")
     @Mapping(target = "status", source = "status.name")
     UnitReport toUnitReport(Unit unit);
+
+    @Mapping(target = "allegiance", source = "allegiance.name")
+    @Mapping(target = "starSystem", source = "starSystem.name")
+    PlanetReport toPlanetReport(Planet planet);
 }
